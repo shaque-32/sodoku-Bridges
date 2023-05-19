@@ -177,9 +177,11 @@ public class Sudoku extends Game {
         return switch(num) {
             case 0 -> NamedSymbol.none;
             case 1 -> NamedSymbol.one;
+            case 2 -> NamedSymbol.two;
+            case 3 -> NamedSymbol.three;
             //complete the rest of the cases (2 through 9)
             //YOUR CODE HERE:
-            
+
             default -> NamedSymbol.none;
         };
     }
