@@ -291,10 +291,19 @@ public class GridGenerator {
 
         //if all of the grids have been used ('gridUsed' contains only 'true'),
             //update 'gridUsed' so that it contains only 'false'
-        //YOUR CODE HERE:
+        //YOUR CODE HERE: 
+        for(d = 0 );
+
 
         int n;
         //set 'n' to a random integer between 0 and grids.length - 1
+
+        n =(int) Math.random()*grids.length-1;
+        while(gridUsed[n] == true){
+            n =(int) Math.random()*grids.length-1;
+
+
+        }
         //keep generating new numbers until gridUsed[n] is false
         //YOUR CODE HERE:
 

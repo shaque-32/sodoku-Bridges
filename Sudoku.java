@@ -1,3 +1,5 @@
+import bridges.base.GameGrid;
+import bridges.base.Grid;
 import bridges.base.NamedColor;
 import bridges.base.NamedSymbol;
 
@@ -54,13 +56,19 @@ public class Sudoku extends Game {
     //called at the start of each game
     private void restart(boolean isEasy) {
         numberGrid = gridGen.newStartingGrid(isEasy);
-        //numberGrid = gridGen.testGrid(); /* uncomment to test game */
+        numberGrid = gridGen.testGrid(); /* uncomment to test game */
 
         for(int r = 0; r < 9; r++) {
             for(int c = 0; c < 9; c++) {
                 //mutable[r][c] should only be true if the cell at (r, c) is empty
                 //this prevents the player from editing the clue numbers
                 //YOUR CODE HERE:
+                if(numberGrid[r][c] >= 1 && numberGrid[r][c] <= 9){
+                    mutable[r][c] = false;
+
+                }else{
+                    mutable[r][c] = true;
+                }
             }
         }
 
@@ -121,12 +129,29 @@ public class Sudoku extends Game {
         if(keyPress("ArrowUp")) selectedRow--;
         //write corresponding 'if' statements for the other three arrow keys
         //YOUR CODE HERE:
+        if(keyPress("ArrowDown")) selectedRow--;
+        if(keyPress("ArrowRight")) selectedCol++;
+        if(keyPress("ArrowLeft")) selectedCol--;
+
 
         //prevent the selected cell from going out of bounds
         //YOUR CODE HERE:
+        if(selectedRow == 9){
+            selectedRow = 0;
+        }
+        if(selectedCol == 9){
+            selectedCol = 0;
+        }
+        if(selectedRow == -1){
+            selectedRow = 8;
+        }
+        if(selectedCol == -1){
+            selectedCol = 8;
+        }
 
         //set the color of the selected cell
         //it should be different from the two background colors so that the player can
+        setBGColor(selectedRow, selectedCol, NamedColor.black);
             //tell which cell is selected
         //YOUR CODE HERE:
 
@@ -150,6 +175,11 @@ public class Sudoku extends Game {
     }
 
     private void editCell(int num) {
+        if(mutable[selectedRow][selectedCol]){
+            numberGrid[selectedRow][selectedCol] = num;
+            drawNumber(selectedRow, selectedCol);
+        }
+
         //if the player is allowed to edit the selected cell, set its value to 'num'
         //then call the 'drawNumber' method
         //YOUR CODE HERE:
@@ -167,20 +197,44 @@ public class Sudoku extends Game {
     }
 
     private void drawNumber(int row, int col) {
+       // protected void drawSymbol(int row, int col, NamedSymbol s, NamedColor c) {
+         //   grid.drawSymbol(row, col, s, c);
+        
+        int val = numberGrid[row][col];
+        NamedSymbol newEntry = numberToSymbol(val);
+
+        if(mutable[row][col] == true){
+            drawSymbol(row,col,newEntry,NamedColor.black);
+        } else {
+            drawSymbol(row,col,newEntry,NamedColor.red);
+
+        }
+
+        }
+
+        
         //use the 'numberToSymbol' method to convert numberGrid[row][col] into a symbol
         //then draw that symbol on the grid
         //use two different colors depending on whether the cell is mutable
         //YOUR CODE HERE:
-    }
+    
 
     private NamedSymbol numberToSymbol(int num) {
         return switch(num) {
             case 0 -> NamedSymbol.none;
             case 1 -> NamedSymbol.one;
-            case 2 -> NamedSymbol.two;
-            case 3 -> NamedSymbol.three;
+            
             //complete the rest of the cases (2 through 9)
             //YOUR CODE HERE:
+            case 2 -> NamedSymbol.two;
+            case 3 -> NamedSymbol.three;
+            case 4 -> NamedSymbol.four;
+            case 5 -> NamedSymbol.five;
+            case 6 -> NamedSymbol.six;
+            case 7 -> NamedSymbol.seven;
+            case 8 -> NamedSymbol.eight;
+            case 9 -> NamedSymbol.nine;
+
 
             default -> NamedSymbol.none;
         };
@@ -230,6 +284,20 @@ public class Sudoku extends Game {
     }
 
     private boolean gridIsSolution() {
+        int total = 0;
+        boolean checker = false;
+        for(int r = 0; r < 9 ; r++){
+            for(int c = 0; c<9; c++){
+                total += numberGrid[r][c];
+                if(total == 45){
+                    checker = true;
+                } else {
+                    break;
+                }
+            }
+            total = 0;
+        }
+        return checker;
         //test if 'numberGrid' contains a valid sudoku solution
         //each row, column, and 3 * 3 square should contain every digit from 1 to 9
         //YOUR CODE HERE:
