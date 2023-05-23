@@ -283,7 +283,7 @@ public class Sudoku extends Game {
         };
     }
 
-    private boolean gridIsSolution() {
+    private boolean checkRowSolution(){
         int total = 0;
         boolean checker = false;
         for(int r = 0; r < 9 ; r++){
@@ -292,12 +292,61 @@ public class Sudoku extends Game {
                 if(total == 45){
                     checker = true;
                 } else {
+                    checker = false;
                     break;
                 }
             }
             total = 0;
         }
         return checker;
+    }
+    private boolean checkColSolution(){
+        int total = 0;
+        boolean checker = false;
+        for(int c = 0; c < 9 ; c++){
+            for(int r = 0; r<9; r++){
+                total += numberGrid[r][c];
+                if(total == 45){
+                    checker = true;
+                } else {
+                    checker = false;
+                    break;
+                }
+            }
+            total = 0;
+        }
+        return checker;
+    }
+
+    private boolean grid3x3(){
+        int total = 0;
+        boolean checker = false;
+
+        for(int r = 0; r <9 ; r+=3){
+            for(int c = 0; c<9; c+=3){
+                total = numberGrid[r][c]+numberGrid[r+1][c]+numberGrid[r+2][c]+numberGrid[r][c+1]+numberGrid[r][c+2]+numberGrid[r+1][c+1]+numberGrid[r+2][c+1]+numberGrid[r+1][c+2]+numberGrid[r+2][c+2];
+
+                //total += numberGrid[r][c];
+                if(total == 45){
+                    checker = true;
+                } else {
+                    checker = false;
+                    break;
+                }
+            }
+            total = 0;
+        }
+        return checker;
+
+    }
+
+    private boolean gridIsSolution() {
+        if(grid3x3() && checkRowSolution() && checkColSolution()){
+            return true;
+        }else{
+            return false;
+        }
+        
         //test if 'numberGrid' contains a valid sudoku solution
         //each row, column, and 3 * 3 square should contain every digit from 1 to 9
         //YOUR CODE HERE:
