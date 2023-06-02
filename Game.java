@@ -154,6 +154,8 @@ public abstract class Game {
             bridges.setDataStructure(grid);
             try {
                 bridges.visualize();
+            //    System.out.println("xxx");
+
 
             }
             catch(Exception e) {
@@ -168,7 +170,7 @@ public abstract class Game {
     private void sleepTimer(long millis) {
         try {
             Thread.sleep(millis);
-        }
+        }    
         catch (InterruptedException e) {
             gameRunning = false;
         }

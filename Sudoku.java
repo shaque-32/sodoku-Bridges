@@ -125,7 +125,7 @@ public class Sudoku extends Game {
             return;
         }
 
-        drawBackground(selectedRow, selectedCol);
+        setBGColor(selectedRow, selectedCol, NamedColor.darkgoldenrod);
 
         if(keyPress("ArrowUp")) selectedRow--;
         //write corresponding 'if' statements for the other three arrow keys
@@ -152,7 +152,7 @@ public class Sudoku extends Game {
 
         //set the color of the selected cell
         //it should be different from the two background colors so that the player can
-        setBGColor(selectedRow, selectedCol, NamedColor.black);
+        setBGColor(selectedRow, selectedCol, NamedColor.royalblue);
 //        //YOUR CODE HERE:
 
         //edit the selected cell
@@ -189,11 +189,16 @@ public class Sudoku extends Game {
         //set the background color of the cell at (row, col)
         //use two different colors depending on the coordinates
         //YOUR CODE HERE:
+
+        
         if((row <= 2 && col <=2)|| (row >= 6 && col<=2) || (row <=2 && col >= 6) || (row>=6 && col>=6)){
               setBGColor(row, col, NamedColor.blueviolet);
+              //System.out.println("xxxxxxxxx");
         } else {
             setBGColor(row, col, NamedColor.burlywood);
         }
+
+        
     }
 
     private void drawNumber(int row, int col) {
