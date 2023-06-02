@@ -284,6 +284,15 @@ public class GridGenerator {
             hardGridUsed[i] = false;
         }
     }
+    public boolean checkUsed(boolean[] list){
+        for(int i = 0; i < list.length; i++){
+                if(list[i] == false){
+                    return false;
+                }
+
+            }
+            return false;
+    }
 
     public int[][] newStartingGrid(boolean isEasy) {
         int[][][] grids = isEasy ? easyGrids : hardGrids;
@@ -292,13 +301,20 @@ public class GridGenerator {
         //if all of the grids have been used ('gridUsed' contains only 'true'),
             //update 'gridUsed' so that it contains only 'false'
         //YOUR CODE HERE: 
-        for(d = 0 );
+           if(checkUsed(gridUsed)){
+            for(int i = 0; i < gridUsed.length;i++){
+                gridUsed[i] = false;
+            }
+           }
+        
+            
+       // for(d = 0 );
 
 
         int n;
         //set 'n' to a random integer between 0 and grids.length - 1
 
-        n =(int) Math.random()*grids.length-1;
+        n = (int) Math.random()*grids.length-1;
         while(gridUsed[n] == true){
             n =(int) Math.random()*grids.length-1;
 

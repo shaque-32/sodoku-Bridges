@@ -154,6 +154,7 @@ public abstract class Game {
             bridges.setDataStructure(grid);
             try {
                 bridges.visualize();
+
             }
             catch(Exception e) {
                 e.printStackTrace();
@@ -198,7 +199,9 @@ public abstract class Game {
             keyboard.update();
             render();
             controlFrameRate();
+
         }
+
 
         sock.close();
     }

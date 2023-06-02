@@ -35,6 +35,7 @@ public class Sudoku extends Game {
                 drawBackground(r, c);
             }
         }
+    
 
         //the selected cell starts in the middle of the canvas
         selectedRow = 4;
@@ -63,7 +64,7 @@ public class Sudoku extends Game {
                 //mutable[r][c] should only be true if the cell at (r, c) is empty
                 //this prevents the player from editing the clue numbers
                 //YOUR CODE HERE:
-                if(numberGrid[r][c] >= 1 && numberGrid[r][c] <= 9){
+                if(numberGrid[r][c] != 0){
                     mutable[r][c] = false;
 
                 }else{
@@ -152,8 +153,7 @@ public class Sudoku extends Game {
         //set the color of the selected cell
         //it should be different from the two background colors so that the player can
         setBGColor(selectedRow, selectedCol, NamedColor.black);
-            //tell which cell is selected
-        //YOUR CODE HERE:
+//        //YOUR CODE HERE:
 
         //edit the selected cell
         if(keyPress("Backspace")) editCell(0);
@@ -190,7 +190,7 @@ public class Sudoku extends Game {
         //use two different colors depending on the coordinates
         //YOUR CODE HERE:
         if((row <= 2 && col <=2)|| (row >= 6 && col<=2) || (row <=2 && col >= 6) || (row>=6 && col>=6)){
-            setBGColor(row, col, NamedColor.blueviolet);
+              setBGColor(row, col, NamedColor.blueviolet);
         } else {
             setBGColor(row, col, NamedColor.burlywood);
         }
