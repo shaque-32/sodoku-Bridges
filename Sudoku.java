@@ -7,7 +7,7 @@ public class Sudoku extends Game {
     public static void main(String[] args) {
         //fill in your own assignment number, username, and API key
         Sudoku game = new Sudoku(0, "shaque", "260127091696");
-        game.initialize();
+       // game.initialize();
 
         game.start();
         game.initialize();
@@ -292,72 +292,43 @@ public class Sudoku extends Game {
         };
     }
 
-    private boolean checkRowSolution(){
-        int total = 0;
-        boolean checker = false;
-        for(int r = 0; r < 9 ; r++){
-            for(int c = 0; c<9; c++){
-                total += numberGrid[r][c];
-                if(total == 45){
-                    checker = true;
-                } else {
-                    checker = false;
+    private boolean gridIsSolution(){
+        for(int[] row: numberGrid){
+            if(!hasAllNine(row)) return false;   
+        }
+
+        for(int c = 0; c < 9; c++){
+            int[] col  = new int[9];
+            for(int r = 0; r < 9; r++){
+                col[r] = numberGrid[r][c];
+            }
+            if(!hasAllNine(col)) return false;
+        }
+
+        for(int r = 0; r < 9; r+=3){
+            for(int c = 0; c < 9; c+=3){
+                int[] square = new int[9];
+                for(int i = 0; i < 9; i++){
+                    square[i] = numberGrid[r+i/3][c+i%3];
+                }
+                if(!hasAllNine(square)) return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean hasAllNine(int [] xs){
+        for(int num = 1; num <= 9; num++){
+            boolean hasNum = false;
+            for(int x:xs){
+                if (x==num){
+                    hasNum = true;
                     break;
                 }
             }
-            total = 0;
+            if(!hasNum) return false; 
         }
-        return checker;
-    }
-    private boolean checkColSolution(){
-        int total = 0;
-        boolean checker = false;
-        for(int c = 0; c < 9 ; c++){
-            for(int r = 0; r<9; r++){
-                total += numberGrid[r][c];
-                if(total == 45){
-                    checker = true;
-                } else {
-                    checker = false;
-                    break;
-                }
-            }
-            total = 0;
-        }
-        return checker;
+        return true;
     }
 
-    private boolean grid3x3(){
-        int total = 0;
-        boolean checker = false;
-
-        for(int r = 0; r <9 ; r+=3){
-            for(int c = 0; c<9; c+=3){
-                total = numberGrid[r][c]+numberGrid[r+1][c]+numberGrid[r+2][c]+numberGrid[r][c+1]+numberGrid[r][c+2]+numberGrid[r+1][c+1]+numberGrid[r+2][c+1]+numberGrid[r+1][c+2]+numberGrid[r+2][c+2];
-
-                //total += numberGrid[r][c];
-                if(total == 45){
-                    checker = true;
-                } else {
-                    checker = false;
-                    break;
-                }
-            }
-            total = 0;
-        }
-        return checker;
-
-    }
-
-    private boolean gridIsSolution() {
-        if(grid3x3() && checkRowSolution() && checkColSolution()){
-            return true;
-        }else{
-            return false;
-        }
-        
-        //test if 'numberGrid' contains a valid sudoku solution
-        //each row, column, and 3 * 3 square should contain every digit from 1 to 9
-        //YOUR CODE HERE:
-    }
 }
