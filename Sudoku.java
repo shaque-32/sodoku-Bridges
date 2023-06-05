@@ -7,7 +7,11 @@ public class Sudoku extends Game {
     public static void main(String[] args) {
         //fill in your own assignment number, username, and API key
         Sudoku game = new Sudoku(0, "shaque", "260127091696");
+        game.initialize();
+
         game.start();
+        game.initialize();
+
     }
 
     private Sudoku(int assignmentNumber, String username, String apiKey) {
