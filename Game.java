@@ -154,7 +154,6 @@ public abstract class Game {
             bridges.setDataStructure(grid);
             try {
                 bridges.visualize();
-            //    System.out.println("xxx");
 
 
             }

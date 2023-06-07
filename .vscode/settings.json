@@ -1,6 +1,6 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "/Users/shayanh/Downloads/Bridges.jar"
+        "/Users/shayanh/Downloads/bridges-java-3.4.2.jar"
     ]
 }

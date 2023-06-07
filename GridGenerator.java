@@ -291,7 +291,7 @@ public class GridGenerator {
                 }
 
             }
-            return false;
+            return true;
     }
 
     public int[][] newStartingGrid(boolean isEasy) {
@@ -314,16 +314,16 @@ public class GridGenerator {
         int n;
         //set 'n' to a random integer between 0 and grids.length - 1
 
-        n = (int) Math.random()*grids.length-1;
+        n = (int) (Math.random()*grids.length-1);
         while(gridUsed[n] == true){
-            n =(int) Math.random()*grids.length-1;
+            n = (int) (Math.random()*grids.length-1);
 
 
         }
         //keep generating new numbers until gridUsed[n] is false
         //YOUR CODE HERE:
 
-        gridUsed[n] = true;
+       gridUsed[n] = true;
 
         //return a copy of grids[n]
         int[][] grid = new int[9][9];
