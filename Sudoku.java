@@ -198,7 +198,6 @@ public class Sudoku extends Game {
         //set the background color of the cell at (row, col)
         //use two different colors depending on the coordinates
         //YOUR CODE HERE:
-
         
         if((row <= 2 && col <=2)|| (row >= 6 && col<=2) || (row <=2 && col >= 6) || (row>=6 && col>=6) || ((row >= 3 && row <=5) && (col >= 3 && col <=5 ))){
         
